@@ -27,7 +27,7 @@ class EditProjectBloc extends Bloc<EditProjectEvent, EditProjectState> {
             event.finishAt,
             event.startAt,
             event.keyValues,
-            event.timeTable,
+            
             event.shortDescription,
             event.profit
           );

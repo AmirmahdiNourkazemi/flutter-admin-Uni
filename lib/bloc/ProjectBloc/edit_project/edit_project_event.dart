@@ -16,7 +16,6 @@ class EditProjectRequestEvent extends EditProjectEvent {
   String startAt;
   String shortDescription;
   List<Map<String, String>> keyValues;
-    List<Map<String, String>> timeTable;
     String profit;
   EditProjectRequestEvent(
     this.uuid,
@@ -31,7 +30,7 @@ class EditProjectRequestEvent extends EditProjectEvent {
     this.finishAt,
     this.startAt,
     this.keyValues,
-    this.timeTable,
+   
     this.shortDescription,
     this.profit,
   );

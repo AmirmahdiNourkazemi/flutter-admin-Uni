@@ -206,19 +206,19 @@ class _ProjectHomeState extends State<ProjectHome> {
                                   ),
                                   TextButton.icon(
                                     onPressed: () {
-                                      // Navigator.of(context).push(
-                                      //   MaterialPageRoute(builder: (context) {
-                                      //     return BlocProvider(
-                                      //       create: (context) {
-                                      //         final DeleteMediaBloc bloc =
-                                      //             DeleteMediaBloc();
-                                      //         bloc.add(DeleteMediaStartEvent());
-                                      //         return bloc;
-                                      //       },
-                                      //       child: DeleteMediaScreen(project),
-                                      //     );
-                                      //   }),
-                                      // );
+                                      Navigator.of(context).push(
+                                        MaterialPageRoute(builder: (context) {
+                                          return BlocProvider(
+                                            create: (context) {
+                                              final DeleteMediaBloc bloc =
+                                                  DeleteMediaBloc();
+                                              bloc.add(DeleteMediaStartEvent());
+                                              return bloc;
+                                            },
+                                            child: DeleteMediaScreen(project),
+                                          );
+                                        }),
+                                      );
                                     },
                                     icon: buildPhosphorIcon(
                                         PhosphorIconsBold.trash),

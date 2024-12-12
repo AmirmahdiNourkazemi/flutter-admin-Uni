@@ -25,7 +25,7 @@ class CreateProjectBloc extends Bloc<CreateProjectEvent, CreateProjectState> {
             event.finishAt,
             event.startAt,
             event.keyValues,
-            event.timeTable,
+        
             event.shortDescription,
             event.profit,
           );

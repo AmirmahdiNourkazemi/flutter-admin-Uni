@@ -110,7 +110,7 @@ class _UpdateProjectState extends State<UpdateProject> {
   final _finishedController = TextEditingController();
   final _startController = TextEditingController();
   final _shortDescriptionController = TextEditingController();
-  final _ifbUuidController = TextEditingController();
+  // final _ifbUuidController = TextEditingController();
   final _commisionController = TextEditingController();
   final _profitController = TextEditingController();
   void initState() {
@@ -667,147 +667,6 @@ class _UpdateProjectState extends State<UpdateProject> {
                       },
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 10),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: TextFormField(
-                            controller: _titleKeyController,
-                            decoration: InputDecoration(
-                              labelText: 'عنوان تاریخ',
-                              labelStyle:
-                                  Theme.of(context).textTheme.titleMedium,
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15),
-                                borderSide: const BorderSide(
-                                  width: 1,
-                                ),
-                              ),
-                              border: OutlineInputBorder(
-                                borderSide: const BorderSide(width: 1),
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                              // Other styling properties...
-                            ),
-                          ),
-                        ),
-                        const SizedBox(width: 10),
-                        Expanded(
-                          child: TextFormField(
-                            controller: _dateValueController,
-                            readOnly: true,
-                            onTap: () async {
-                              keyDate = await showPersianDatePicker(
-                                  confirmText: 'انتخاب',
-                                  initialEntryMode: PDatePickerEntryMode.input,
-                                  initialDatePickerMode: PDatePickerMode.year,
-                                  context: context,
-                                  initialDate: Jalali.now(),
-                                  firstDate: Jalali(1300, 4),
-                                  lastDate: Jalali(1450, 4));
-
-                              setState(() {
-                                _dateValueController.text =
-                                    "${keyDate!.toGregorian().year}/${keyDate!.toGregorian().month}/${keyDate!.toGregorian().day}";
-                              });
-                              setState(
-                                () {
-                                  _dateValueController.text = keyDate!
-                                      .formatFullDate()
-                                      .toPersianDigit();
-                                },
-                              );
-                            },
-                            decoration: InputDecoration(
-                              labelText: 'تاریخ',
-                              labelStyle:
-                                  Theme.of(context).textTheme.titleMedium,
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20),
-                                borderSide: const BorderSide(
-                                  width: 1,
-                                ),
-                              ),
-                              border: OutlineInputBorder(
-                                borderSide: const BorderSide(width: 1),
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                              // Other styling properties...
-                            ),
-                          ),
-                        ),
-                        const SizedBox(width: 10),
-                        ElevatedButton(
-                          style:
-                              ElevatedButton.styleFrom(shape: CircleBorder()),
-                          onPressed: () {
-                            addTimeValuePair(_titleKeyController.text,
-                                '${keyDate!.toGregorian().toDateTime()}');
-                            _titleKeyController.clear();
-                            _dateValueController.clear();
-                          },
-                          child:
-                              buildPhosphorIcon(PhosphorIconsBold.plusCircle),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: timeTable.length * 80,
-                    child: ListView.builder(
-                      scrollDirection: Axis.vertical,
-                      controller: _screenController,
-                      itemCount: timeTable.length,
-                      itemBuilder: (context, index) {
-                        return Column(
-                          children: [
-                            ListTile(
-                              isThreeLine: true,
-                              title: Text(
-                                'لیبل: ${timeTable[index]['title'] ?? ''}',
-                                style: Theme.of(context).textTheme.titleMedium,
-                              ),
-                              subtitle: Text(
-                                'تاریخ:${timeTable[index]['date'] != null ? timeTable[index]['date']!.toString().toPersianDate() : ""}',
-                                style: Theme.of(context).textTheme.titleMedium,
-                              ),
-                              trailing: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  IconButton(
-                                    color: AppColorScheme.primaryColor,
-                                    icon: buildPhosphorIcon(
-                                        PhosphorIconsBold.pencilSimple),
-                                    onPressed: () {
-                                      _showEditDialog(context, index);
-                                    },
-                                  ),
-                                  IconButton(
-                                    color: AppColorScheme.primaryColor,
-                                    icon: buildPhosphorIcon(
-                                      PhosphorIconsBold.trash,
-                                    ),
-                                    onPressed: () {
-                                      // Add logic to remove the key-value pair at the given index
-                                      setState(() {
-                                        timeTable.removeAt(index);
-                                      });
-                                    },
-                                  ),
-                                ],
-                              ),
-                            ),
-                            const Divider(
-                              height: 1,
-                              color: Colors.grey,
-                            ),
-                          ],
-                        );
-                      },
-                    ),
-                  ),
                   BlocListener<EditProjectBloc, EditProjectState>(
                     listener: (context, state) {
                       if (state is EditProjectResponseState) {
@@ -850,6 +709,7 @@ class _UpdateProjectState extends State<UpdateProject> {
                         ),
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
+                            print('ok');
                             final title = _titleController.text;
                             final shortDescription =
                                 _shortDescriptionController.text;
@@ -870,8 +730,7 @@ class _UpdateProjectState extends State<UpdateProject> {
                             final fundNeeded = _fundNeededController.text
                                 .replaceAll(',', '')
                                 .toEnglishDigit();
-                            final ifbUuid =
-                                _ifbUuidController.text.toEnglishDigit();
+
                             final expectedProfit =
                                 _expectedController.text.toEnglishDigit();
                             final finishAt = isDatePressed
@@ -882,11 +741,9 @@ class _UpdateProjectState extends State<UpdateProject> {
                                 ? '${start!.toGregorian().year}-${start!.toGregorian().month}-${start!.toGregorian().day}'
                                 : jalili2Gorgian(_startController.text);
 
-                            final commison = int.parse(
-                                _commisionController.text.toEnglishDigit());
-
                             final profit =
                                 _profitController.text.toEnglishDigit();
+
                             BlocProvider.of<EditProjectBloc>(context).add(
                               EditProjectRequestEvent(
                                 widget._project.uuid!,
@@ -901,7 +758,6 @@ class _UpdateProjectState extends State<UpdateProject> {
                                 finishAt,
                                 startAt,
                                 keyValues,
-                                timeTable,
                                 shortDescription,
                                 profit,
                               ),

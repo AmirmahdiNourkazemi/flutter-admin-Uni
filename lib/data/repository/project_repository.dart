@@ -24,7 +24,7 @@ abstract class IProjectsRepository {
     String finishAt,
     String startAt,
     List<Map<String, String>> keyValues,
-    List<Map<String, String>> timeTable,
+    
     String shortDescription,
    String profit,
   );
@@ -45,7 +45,6 @@ abstract class IProjectsRepository {
     String finishAt,
     String startAt,
     List<Map<String, String>> keyValues,
-      List<Map<String, String>> timeTable,
     String shortDescription,
     String profit,
    
@@ -92,7 +91,7 @@ class ProjectsRepository extends IProjectsRepository {
       String finishAt,
       String startAt,
       List<Map<String, String>> keyValues,
-        List<Map<String, String>> timeTable,
+      
       String shortDescription,
       String profit,
      ) async {
@@ -108,7 +107,7 @@ class ProjectsRepository extends IProjectsRepository {
           finishAt,
           startAt,
           keyValues,
-          timeTable,
+          
           shortDescription,
           profit,
          );
@@ -132,7 +131,6 @@ class ProjectsRepository extends IProjectsRepository {
       String finishAt,
       String startAt,
       List<Map<String, String>> keyValues,
-      List<Map<String, String>> timeTable,
       String shortDescription,
       String profit,
      ) async {
@@ -150,7 +148,7 @@ class ProjectsRepository extends IProjectsRepository {
         finishAt,
         startAt,
         keyValues,
-        timeTable,
+       
         shortDescription,
         profit,
       );

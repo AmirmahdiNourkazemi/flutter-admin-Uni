@@ -24,7 +24,6 @@ abstract class IProjectsDatasource {
     String finishAt,
     String startAt,
     List<Map<String, String>> keyValues,
-    List<Map<String, String>> timeTable,
     String shortDescription,
     String profit,
   );
@@ -44,7 +43,6 @@ abstract class IProjectsDatasource {
     String finishAt,
     String startAt,
     List<Map<String, String>> keyValues,
-    List<Map<String, String>> timeTable,
     String shortDescription,
     String profit,
   );
@@ -93,7 +91,6 @@ class ProjectsDtasource extends IProjectsDatasource {
     String finishAt,
     String startAt,
     List<Map<String, String>> keyValues,
-    List<Map<String, String>> timeTable,
     String shortDescription,
     String profit,
   ) async {
@@ -148,13 +145,12 @@ class ProjectsDtasource extends IProjectsDatasource {
     String finishAt,
     String startAt,
     List<Map<String, String>> keyValues,
-    List<Map<String, String>> timeTable,
     String shortDescription,
     String profit,
   ) async {
     try {
-      await _dio.patch(
-        '/admin/projects/$uuid',
+      await _dio.post(
+        '/admin/project/$uuid',
         data: {
           'title': title,
           'description': description,
@@ -220,12 +216,13 @@ class ProjectsDtasource extends IProjectsDatasource {
   @override
   Future<void> deleteMedia(String uuid, String mediaUuid) async {
     try {
-      await _dio.delete('/admin/projects/$uuid/media/$mediaUuid',
+      await _dio.delete('/admin/project/$uuid/media/$mediaUuid',
           options: Options(headers: {
             'Accept': 'application/json',
             'Authorization': 'Bearer $token',
           }));
     } on DioError catch (ex) {
+      print(ex.response?.data['message']);
       throw ApiExeption(ex.response?.data['message'], ex.response?.statusCode);
     } catch (ex) {
       throw ApiExeption('unknown error happend', 0);
