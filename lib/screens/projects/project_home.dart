@@ -117,7 +117,7 @@ class _ProjectHomeState extends State<ProjectHome> {
                               Padding(
                                 padding: const EdgeInsets.only(top: 20),
                                 child: Container(
-                                  child: project.images.isNotEmpty
+                                  child: project.images!.isNotEmpty
                                       ? CachedImage(
                                           width: MediaQuery.of(context)
                                                   .size
@@ -125,7 +125,7 @@ class _ProjectHomeState extends State<ProjectHome> {
                                               0.3,
                                           height: 200,
                                           imageUrl:
-                                              project.images[0].originalUrl,
+                                              project.images![0].originalUrl,
                                           bottomRightradious: 10,
                                           bottomLeftradious: 10,
                                           topLeftradious: 10,
@@ -189,7 +189,7 @@ class _ProjectHomeState extends State<ProjectHome> {
                                                 return bloc;
                                               },
                                               child: UploadMediaScreen(
-                                                  project.uuid),
+                                                  project.uuid!),
                                             );
                                           },
                                         ),
@@ -206,19 +206,19 @@ class _ProjectHomeState extends State<ProjectHome> {
                                   ),
                                   TextButton.icon(
                                     onPressed: () {
-                                      Navigator.of(context).push(
-                                        MaterialPageRoute(builder: (context) {
-                                          return BlocProvider(
-                                            create: (context) {
-                                              final DeleteMediaBloc bloc =
-                                                  DeleteMediaBloc();
-                                              bloc.add(DeleteMediaStartEvent());
-                                              return bloc;
-                                            },
-                                            child: DeleteMediaScreen(project),
-                                          );
-                                        }),
-                                      );
+                                      // Navigator.of(context).push(
+                                      //   MaterialPageRoute(builder: (context) {
+                                      //     return BlocProvider(
+                                      //       create: (context) {
+                                      //         final DeleteMediaBloc bloc =
+                                      //             DeleteMediaBloc();
+                                      //         bloc.add(DeleteMediaStartEvent());
+                                      //         return bloc;
+                                      //       },
+                                      //       child: DeleteMediaScreen(project),
+                                      //     );
+                                      //   }),
+                                      // );
                                     },
                                     icon: buildPhosphorIcon(
                                         PhosphorIconsBold.trash),
@@ -237,7 +237,12 @@ class _ProjectHomeState extends State<ProjectHome> {
                                 children: [
                                   TextButton.icon(
                                     onPressed: () {
-                                      _dialogForShowOrHidden(context,context,project.uuid,project.title , project.deletedAt);
+                                      _dialogForShowOrHidden(
+                                          context,
+                                          context,
+                                          project.uuid!,
+                                          project.title!,
+                                          project.deletedAt);
                                       // if (project.deletedAt == null) {
                                       //   BlocProvider.of<ProjectBloc>(context)
                                       //       .add(ProjectDeleteEvent(
@@ -302,8 +307,11 @@ class _ProjectHomeState extends State<ProjectHome> {
                                   ),
                                   TextButton.icon(
                                     onPressed: () {
-                                      _showDeleteConfirmationDialog(context,
-                                          context, project.uuid, project.title);
+                                      _showDeleteConfirmationDialog(
+                                          context,
+                                          context,
+                                          project.uuid!,
+                                          project.title!);
                                     },
                                     icon: buildPhosphorIcon(
                                         PhosphorIconsBold.eraser),
@@ -356,7 +364,7 @@ void _showDeleteConfirmationDialog(BuildContext dialogContext,
               onPressed: () {
                 Navigator.of(context).pop(); // Close the dialog
                 BlocProvider.of<ProjectBloc>(blocContext)
-                    .add(ProjectDeleteForceEvent(projectId));
+                    .add(ProjectDeleteEvent(projectId));
               },
               child: Text('بله'),
             ),
@@ -373,8 +381,12 @@ void _showDeleteConfirmationDialog(BuildContext dialogContext,
   );
 }
 
-void _dialogForShowOrHidden(BuildContext dialogContext,BuildContext blocContext, String projectId,
-    String name, String? deletedAt) {
+void _dialogForShowOrHidden(
+    BuildContext dialogContext,
+    BuildContext blocContext,
+    String projectId,
+    String name,
+    String? deletedAt) {
   showDialog(
     context: dialogContext,
     builder: (BuildContext context) {

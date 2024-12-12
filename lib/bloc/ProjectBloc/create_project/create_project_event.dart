@@ -15,8 +15,7 @@ class CreateProjectRequestEvent extends CreateProjectEvent {
   String shortDescription;
   List<Map<String, String>> keyValues;
   List<Map<String, String>> timeTable;
-  String ifbUuid;
-    String profit;
+  String profit;
   CreateProjectRequestEvent(
     this.title,
     this.description,
@@ -30,7 +29,6 @@ class CreateProjectRequestEvent extends CreateProjectEvent {
     this.keyValues,
     this.timeTable,
     this.shortDescription,
-    this.ifbUuid,
-    this.profit
+    this.profit,
   );
 }

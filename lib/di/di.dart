@@ -30,7 +30,7 @@ Future<void> getItInit() async {
   String token = AuthMnager.readAuth();
   locator.registerSingleton<Dio>(
     Dio(
-      BaseOptions(baseUrl: 'http://194.48.198.227:9000/api', headers: {
+      BaseOptions(baseUrl: 'http://192.168.1.112:8080/api', headers: {
         'Accept': 'application/json',
         'Authorization': 'Bearer $token',
         'Access-Control-Allow-Origin': '*',
@@ -51,8 +51,8 @@ Future<void> getItInit() async {
   locator.registerFactory<ITicketDataSource>(() => TicketDatasource());
   locator.registerFactory<IWithdrawDatasouce>(() => WithdrawDatasource());
   locator.registerFactory<ICommentDataSource>(() => CommentDatasource());
-    locator.registerFactory<IDepositDtasource>(() => DepositDatasource());
-    locator.registerFactory<ICompanyDatasource>(() => CompanyDatasource());
+  locator.registerFactory<IDepositDtasource>(() => DepositDatasource());
+  locator.registerFactory<ICompanyDatasource>(() => CompanyDatasource());
   // //repository
   locator
       .registerFactory<IAuthenticationRepository>(() => AuthenticationRemote());
@@ -63,9 +63,9 @@ Future<void> getItInit() async {
   //   locator.registerFactory<ICompanyRepository>(() => CompanyRepository());
   locator.registerFactory<ITicketRepository>(() => TicketRepository());
   locator.registerFactory<IWithdrawRepository>(() => WithdrawRepository());
-    locator.registerFactory<ICommentRepository>(() => CommentRepository());
-    locator.registerFactory<IDepositRepository>(() => DepositRepository());
-    locator.registerFactory<ICompanyRespository>(() => CompanyRespository());
+  locator.registerFactory<ICommentRepository>(() => CommentRepository());
+  locator.registerFactory<IDepositRepository>(() => DepositRepository());
+  locator.registerFactory<ICompanyRespository>(() => CompanyRespository());
 
   //   //
   //   locator.registerSingleton<CompanyBloc>(CompanyBloc());

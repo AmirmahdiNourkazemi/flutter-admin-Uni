@@ -23,7 +23,7 @@ class _CommentScreenState extends State<CommentScreen> {
     // TODO: implement initState
     super.initState();
     BlocProvider.of<CommentBloc>(context)
-        .add(CommentGetEvent(widget._project.uuid));
+        .add(CommentGetEvent(widget._project.uuid!));
   }
 
   @override
@@ -87,153 +87,202 @@ class _CommentScreenState extends State<CommentScreen> {
                         ],
                         rows: r.data!.expand(
                           (comment) {
-                         
                             return [
-                               if (comment.replies != []) ...[
+                              if (comment.replies != []) ...[
                                 DataRow(cells: [
-                                  DataCell(Container()), // Empty cell for alignment
-                                  DataCell(Container()), // Empty cell for alignment
-                                  DataCell(Container()), // Empty cell for alignment
-                                  DataCell(Text('نظر:', style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),)),
-                                  DataCell(Container()), // Empty cell for alignment
-                                  DataCell(Container()), // Empty cell for alignment
+                                  DataCell(
+                                      Container()), // Empty cell for alignment
+                                  DataCell(
+                                      Container()), // Empty cell for alignment
+                                  DataCell(
+                                      Container()), // Empty cell for alignment
+                                  DataCell(Text(
+                                    'نظر:',
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold),
+                                  )),
+                                  DataCell(
+                                      Container()), // Empty cell for alignment
+                                  DataCell(
+                                      Container()), // Empty cell for alignment
                                 ]),
-                              DataRow(cells: [
-                              DataCell(
-                                  Text(comment.id.toString().toPersianDigit())),
-                              DataCell(
-                                Text(
-                                  comment.createdAt.toPersianDate(),
-                                  style: Theme.of(context).textTheme.titleSmall,
-                                ),
-                              ),
-                              DataCell(
-                                Text(
-                                  comment.user.fullName!,
-                                  softWrap: true,
-                                  style: Theme.of(context).textTheme.titleSmall,
-                                ),
-                              ),
-                                 DataCell(
-                                Text(
-                                  comment.body,
-                                  softWrap: true,
-                                  style: Theme.of(context).textTheme.titleSmall,
-                                ),
-                              ),
-                              DataCell(
-                                Text(
-                                  comment.verified ? 'تایید شده' : 'تایید نشده',
-                                  softWrap: true,
-                                  style: TextStyle(
-                                      color: comment.verified
-                                          ? Colors.blue
-                                          : Colors.red,
-                                      fontSize: Responsive.isDesktop(context)
-                                          ? 12.0
-                                          : 10.0,
-                                      fontFamily: 'IR',
-                                      fontWeight: FontWeight.w400
-                                      // Other properties...
-                                      ),
-                                ),
-                              ),
-                              DataCell(ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                    backgroundColor:
-                                        comment.verified ? Colors.grey : null),
-                                child: Text(
-                                  'تغییر وضعیت',
-                                  style: Theme.of(context).textTheme.titleSmall,
-                                ),
-                                onPressed: () {
-                                  comment.verified == false
-                                      ? BlocProvider.of<CommentBloc>(context)
-                                          .add(CommentChangeVerifyEvent(
-                                              widget._project.uuid,
-                                              comment.uuid))
-                                      : null;
-                                },
-                              ))
-                            ]),
-                            if (comment.replies!.isNotEmpty) ...[
                                 DataRow(cells: [
-                                  DataCell(Container()), // Empty cell for alignment
-                                  DataCell(Container()), // Empty cell for alignment
-                                  DataCell(Container()), // Empty cell for alignment
-                                  DataCell(Text('پاسخ‌ها:', style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),)),
-                                  DataCell(Container()), // Empty cell for alignment
-                                  DataCell(Container()), // Empty cell for alignment
-                                ]),
-                            ...?comment.replies?.map((reply) {
-                            
-                                return DataRow(cells: [
-                                  DataCell(Text(reply.id.toString().toPersianDigit())), // Empty cell for alignment
+                                  DataCell(Text(
+                                      comment.id.toString().toPersianDigit())),
                                   DataCell(
-                                    Padding(
-                                      padding: const EdgeInsets.only(right: 20),
-                                      child: Text(
-                                        reply.createdAt.toPersianDate(),
-                                        style: Theme.of(context).textTheme.titleSmall,
-                                      ),
-                                    ),
-                                  ),
-                                  DataCell(
-                                    Padding(
-                                     padding: const EdgeInsets.only(right: 20),
-                                      child: Text(
-                                        reply.user.fullName ?? '',
-                                        softWrap: true,
-                                        style: Theme.of(context).textTheme.titleSmall,
-                                      ),
-                                    ),
-                                  ),
-                                  DataCell(
-                                    Padding(
-                                      padding: const EdgeInsets.only(right: 20),
-                                      child: Text(
-                                        reply.body,
-                                        softWrap: true,
-                                        style: Theme.of(context).textTheme.titleSmall,
-                                        maxLines: null,
-                                      ),
+                                    Text(
+                                      comment.createdAt.toPersianDate(),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleSmall,
                                     ),
                                   ),
                                   DataCell(
                                     Text(
-                                      reply.verified ? 'تایید شده' : 'تایید نشده',
+                                      comment.user.fullName!,
+                                      softWrap: true,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleSmall,
+                                    ),
+                                  ),
+                                  DataCell(
+                                    Text(
+                                      comment.body,
+                                      softWrap: true,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleSmall,
+                                    ),
+                                  ),
+                                  DataCell(
+                                    Text(
+                                      comment.verified
+                                          ? 'تایید شده'
+                                          : 'تایید نشده',
                                       softWrap: true,
                                       style: TextStyle(
-                                        color: reply.verified
-                                            ? Colors.blue
-                                            : Colors.red,
-                                        fontSize: 12.0,
-                                        fontFamily: 'IR',
-                                        fontWeight: FontWeight.w400,
-                                      ),
+                                          color: comment.verified
+                                              ? Colors.blue
+                                              : Colors.red,
+                                          fontSize:
+                                              Responsive.isDesktop(context)
+                                                  ? 12.0
+                                                  : 10.0,
+                                          fontFamily: 'IR',
+                                          fontWeight: FontWeight.w400
+                                          // Other properties...
+                                          ),
                                     ),
                                   ),
                                   DataCell(ElevatedButton(
                                     style: ElevatedButton.styleFrom(
-                                        backgroundColor:
-                                            reply.verified ? Colors.grey : null),
+                                        backgroundColor: comment.verified
+                                            ? Colors.grey
+                                            : null),
                                     child: Text(
                                       'تغییر وضعیت',
-                                      style: Theme.of(context).textTheme.titleSmall,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleSmall,
                                     ),
                                     onPressed: () {
-                                      reply.verified == false
-                                          ? BlocProvider.of<CommentBloc>(context)
+                                      comment.verified == false
+                                          ? BlocProvider.of<CommentBloc>(
+                                                  context)
                                               .add(CommentChangeVerifyEvent(
-                                                  widget._project.uuid, reply.uuid))
+                                                  widget._project.uuid!,
+                                                  comment.uuid))
                                           : null;
                                     },
-                                  )),
-                                ]);
-                              }).toList(),
-                            ]]];
-                              
-
+                                  ))
+                                ]),
+                                if (comment.replies!.isNotEmpty) ...[
+                                  DataRow(cells: [
+                                    DataCell(
+                                        Container()), // Empty cell for alignment
+                                    DataCell(
+                                        Container()), // Empty cell for alignment
+                                    DataCell(
+                                        Container()), // Empty cell for alignment
+                                    DataCell(Text(
+                                      'پاسخ‌ها:',
+                                      style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold),
+                                    )),
+                                    DataCell(
+                                        Container()), // Empty cell for alignment
+                                    DataCell(
+                                        Container()), // Empty cell for alignment
+                                  ]),
+                                  ...?comment.replies?.map((reply) {
+                                    return DataRow(cells: [
+                                      DataCell(Text(reply.id
+                                          .toString()
+                                          .toPersianDigit())), // Empty cell for alignment
+                                      DataCell(
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(right: 20),
+                                          child: Text(
+                                            reply.createdAt.toPersianDate(),
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .titleSmall,
+                                          ),
+                                        ),
+                                      ),
+                                      DataCell(
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(right: 20),
+                                          child: Text(
+                                            reply.user.fullName ?? '',
+                                            softWrap: true,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .titleSmall,
+                                          ),
+                                        ),
+                                      ),
+                                      DataCell(
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(right: 20),
+                                          child: Text(
+                                            reply.body,
+                                            softWrap: true,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .titleSmall,
+                                            maxLines: null,
+                                          ),
+                                        ),
+                                      ),
+                                      DataCell(
+                                        Text(
+                                          reply.verified
+                                              ? 'تایید شده'
+                                              : 'تایید نشده',
+                                          softWrap: true,
+                                          style: TextStyle(
+                                            color: reply.verified
+                                                ? Colors.blue
+                                                : Colors.red,
+                                            fontSize: 12.0,
+                                            fontFamily: 'IR',
+                                            fontWeight: FontWeight.w400,
+                                          ),
+                                        ),
+                                      ),
+                                      DataCell(ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                            backgroundColor: reply.verified
+                                                ? Colors.grey
+                                                : null),
+                                        child: Text(
+                                          'تغییر وضعیت',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .titleSmall,
+                                        ),
+                                        onPressed: () {
+                                          reply.verified == false
+                                              ? BlocProvider.of<CommentBloc>(
+                                                      context)
+                                                  .add(CommentChangeVerifyEvent(
+                                                      widget._project.uuid!,
+                                                      reply.uuid))
+                                              : null;
+                                        },
+                                      )),
+                                    ]);
+                                  }).toList(),
+                                ]
+                              ]
+                            ];
                           },
                         ).toList(),
                       );

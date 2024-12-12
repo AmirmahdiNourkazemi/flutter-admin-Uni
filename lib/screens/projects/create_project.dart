@@ -363,38 +363,6 @@ class _CreateProjectState extends State<CreateProject> {
                     padding: const EdgeInsets.symmetric(
                         horizontal: 20, vertical: 10),
                     child: TextFormField(
-                      controller: _ifbUuidController,
-                      style: Theme.of(context).textTheme.titleMedium,
-                      decoration: InputDecoration(
-                        contentPadding: const EdgeInsets.symmetric(
-                            vertical: 10, horizontal: 15),
-                        border: const OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.blue, width: 1),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(15),
-                          ),
-                        ),
-                        labelText: 'کد فرابورسی',
-                        labelStyle: Theme.of(context).textTheme.titleMedium,
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15),
-                          borderSide: const BorderSide(
-                            width: 1,
-                          ),
-                        ),
-                      ),
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'لطفا کد فرابورسی خود را وارد کنید';
-                        }
-                        return null;
-                      },
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 10),
-                    child: TextFormField(
                       style: Theme.of(context).textTheme.titleMedium,
                       readOnly: true,
                       controller: _startController,
@@ -847,7 +815,6 @@ class _CreateProjectState extends State<CreateProject> {
                                 keyValues,
                                 timeTable,
                                 shortDescription,
-                                ifbUuid,
                                 profit,
                               ),
                             );

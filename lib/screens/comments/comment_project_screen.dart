@@ -83,7 +83,7 @@ class _CommentProjectState extends State<CommentProject> {
                             rows: state.getProjects.fold((l) => [], (projects) {
                               return projects.projects.map((project) {
                                 return DataRow(cells: [
-                                  DataCell(Text(project.title)),
+                                  DataCell(Text(project.title!)),
                                   DataCell(
                                     TextButton(
                                       child: const Text('مشاهده'),

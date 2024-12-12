@@ -1,5 +1,4 @@
 class ProjectResponse {
-  final String? ifbUuid;
   final String? title;
   final String? description;
   final String? startAt;
@@ -21,7 +20,6 @@ class ProjectResponse {
     this.startAt,
     this.finishAt,
     this.uuid,
-    this.ifbUuid,
     this.updatedAt,
     this.createdAt,
     this.id,
@@ -38,14 +36,10 @@ class ProjectResponse {
       startAt: json['start_at'],
       finishAt: json['finish_at'],
       uuid: json['uuid'],
-      ifbUuid: json['ifb_uuid'],
       updatedAt: json['updated_at'],
       createdAt: json['created_at'],
       id: json['id'],
       images: List<String>.from(json['images']),
-      attachments: List<String>.from(json['attachments']),
-      progressBar: json['progress_bar'],
-      videos: List<String>.from(json['videos']),
     );
   }
 }

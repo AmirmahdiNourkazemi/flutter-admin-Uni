@@ -50,7 +50,7 @@ class _UpdateProjectState extends State<UpdateProject> {
     });
   }
 
-    void addTimeValuePair(String key, String value) {
+  void addTimeValuePair(String key, String value) {
     setState(() {
       timeTable.add({'title': key, 'date': value});
     });
@@ -58,7 +58,6 @@ class _UpdateProjectState extends State<UpdateProject> {
 
   final TextEditingController _keyController = TextEditingController();
   final TextEditingController _valueController = TextEditingController();
-
 
   final TextEditingController _titleKeyController = TextEditingController();
   final TextEditingController _dateValueController = TextEditingController();
@@ -112,32 +111,30 @@ class _UpdateProjectState extends State<UpdateProject> {
   final _startController = TextEditingController();
   final _shortDescriptionController = TextEditingController();
   final _ifbUuidController = TextEditingController();
-   final _commisionController = TextEditingController();
-   final _profitController = TextEditingController();
+  final _commisionController = TextEditingController();
+  final _profitController = TextEditingController();
   void initState() {
-    _titleController.text = widget._project.title;
+    _titleController.text = widget._project.title!;
     // final delta = Delta.fromJson(jsonDecode(widget._project.description));
     _controller.document =
-        Document.fromJson(jsonDecode(widget._project.description));
+        Document.fromJson(jsonDecode(widget._project.description!));
     // selection:
     // const TextSelection.collapsed(offset: 0);
     widget._project.properties?.forEach((property) {
       addKeyValuePair(property.key!, property.value!);
     });
-     widget._project.timeTables?.forEach((timeTable) {
-      addTimeValuePair(timeTable.title!, timeTable.date!);
-    });
+
     _fundNeededController.text =
         widget._project.fundNeeded.toString().toPersianDigit().seRagham();
     _minInvestController.text =
         widget._project.minInvest.toString().toPersianDigit().seRagham();
-    _expectedController.text = widget._project.expectedProfit;
-    _finishedController.text = widget._project.finishAt.toPersianDate();
-    _startController.text = widget._project.startAt.toPersianDate();
+    _expectedController.text =
+        widget._project.expectedProfit!.toString().toPersianDigit();
+    _finishedController.text = widget._project.finishAt!.toPersianDate();
+    _startController.text = widget._project.startAt!.toPersianDate();
     _shortDescriptionController.text = widget._project.shortDescription ?? '';
-    _ifbUuidController.text = widget._project.ifbUuid.toEnglishDigit();
-    _commisionController.text = widget._project.commission.toString().toPersianDigit();
-    _profitController.text = widget._project.profit.toPersianDigit();
+    _profitController.text =
+        widget._project.profit!.toString().toPersianDigit();
   }
 
   @override
@@ -263,7 +260,6 @@ class _UpdateProjectState extends State<UpdateProject> {
                               configurations: QuillEditorConfigurations(
                                 controller: _controller,
                                 padding: const EdgeInsets.all(4),
-                                
                                 sharedConfigurations:
                                     const QuillSharedConfigurations(
                                   locale: Locale('fa'),
@@ -373,7 +369,6 @@ class _UpdateProjectState extends State<UpdateProject> {
                       },
                     ),
                   ),
-                
                   Padding(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 20, vertical: 10),
@@ -401,38 +396,6 @@ class _UpdateProjectState extends State<UpdateProject> {
                       validator: (value) {
                         if (value!.isEmpty) {
                           return 'لطفا میزان سود در ماه را وارد کنید';
-                        }
-                        return null;
-                      },
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 10),
-                    child: TextFormField(
-                      controller: _ifbUuidController,
-                      style: Theme.of(context).textTheme.titleMedium,
-                      decoration: InputDecoration(
-                        contentPadding: const EdgeInsets.symmetric(
-                            vertical: 10, horizontal: 15),
-                        border: const OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.blue, width: 1),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(15),
-                          ),
-                        ),
-                        labelText: 'کد فرابورسی',
-                        labelStyle: Theme.of(context).textTheme.titleMedium,
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15),
-                          borderSide: const BorderSide(
-                            width: 1,
-                          ),
-                        ),
-                      ),
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'لطفا کد فرابورسی را وارد کنید';
                         }
                         return null;
                       },
@@ -663,7 +626,6 @@ class _UpdateProjectState extends State<UpdateProject> {
                       ],
                     ),
                   ),
-                  
                   SizedBox(
                     height: keyValues.length * 80,
                     child: ListView.builder(
@@ -705,7 +667,7 @@ class _UpdateProjectState extends State<UpdateProject> {
                       },
                     ),
                   ),
-Padding(
+                  Padding(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 20, vertical: 10),
                     child: Row(
@@ -736,27 +698,27 @@ Padding(
                           child: TextFormField(
                             controller: _dateValueController,
                             readOnly: true,
-                            onTap: () async{
-                                 keyDate = await showPersianDatePicker(
-                            confirmText: 'انتخاب',
-                            initialEntryMode: PDatePickerEntryMode.input,
-                            initialDatePickerMode: PDatePickerMode.year,
-                            context: context,
-                            initialDate: Jalali.now(),
-                            firstDate: Jalali(1300, 4),
-                            lastDate: Jalali(1450, 4));
+                            onTap: () async {
+                              keyDate = await showPersianDatePicker(
+                                  confirmText: 'انتخاب',
+                                  initialEntryMode: PDatePickerEntryMode.input,
+                                  initialDatePickerMode: PDatePickerMode.year,
+                                  context: context,
+                                  initialDate: Jalali.now(),
+                                  firstDate: Jalali(1300, 4),
+                                  lastDate: Jalali(1450, 4));
 
-                        setState(() {
-                          _dateValueController.text =
-                              "${keyDate!.toGregorian().year}/${keyDate!.toGregorian().month}/${keyDate!.toGregorian().day}";
-                                
-                        });
-                        setState(
-                          () {
-                           _dateValueController.text =
-                              keyDate!.formatFullDate().toPersianDigit();
-                          },
-                        );
+                              setState(() {
+                                _dateValueController.text =
+                                    "${keyDate!.toGregorian().year}/${keyDate!.toGregorian().month}/${keyDate!.toGregorian().day}";
+                              });
+                              setState(
+                                () {
+                                  _dateValueController.text = keyDate!
+                                      .formatFullDate()
+                                      .toPersianDigit();
+                                },
+                              );
                             },
                             decoration: InputDecoration(
                               labelText: 'تاریخ',
@@ -780,9 +742,9 @@ Padding(
                         ElevatedButton(
                           style:
                               ElevatedButton.styleFrom(shape: CircleBorder()),
-                           onPressed: () {
-                            addTimeValuePair(
-                                _titleKeyController.text, '${keyDate!.toGregorian().toDateTime()}');
+                          onPressed: () {
+                            addTimeValuePair(_titleKeyController.text,
+                                '${keyDate!.toGregorian().toDateTime()}');
                             _titleKeyController.clear();
                             _dateValueController.clear();
                           },
@@ -799,7 +761,6 @@ Padding(
                       controller: _screenController,
                       itemCount: timeTable.length,
                       itemBuilder: (context, index) {
-                      
                         return Column(
                           children: [
                             ListTile(
@@ -809,21 +770,20 @@ Padding(
                                 style: Theme.of(context).textTheme.titleMedium,
                               ),
                               subtitle: Text(
-                                'تاریخ:${timeTable[index]['date']!=null?
-                                timeTable[index]['date']!.toString().toPersianDate():""
-                                 }',
+                                'تاریخ:${timeTable[index]['date'] != null ? timeTable[index]['date']!.toString().toPersianDate() : ""}',
                                 style: Theme.of(context).textTheme.titleMedium,
                               ),
                               trailing: Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
                                   IconButton(
-                                  color: AppColorScheme.primaryColor,
-                                  icon: buildPhosphorIcon(PhosphorIconsBold.pencilSimple),
-                                  onPressed: () {
-                                    _showEditDialog(context, index);
-                                  },
-                                ),
+                                    color: AppColorScheme.primaryColor,
+                                    icon: buildPhosphorIcon(
+                                        PhosphorIconsBold.pencilSimple),
+                                    onPressed: () {
+                                      _showEditDialog(context, index);
+                                    },
+                                  ),
                                   IconButton(
                                     color: AppColorScheme.primaryColor,
                                     icon: buildPhosphorIcon(
@@ -890,7 +850,6 @@ Padding(
                         ),
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
-                          
                             final title = _titleController.text;
                             final shortDescription =
                                 _shortDescriptionController.text;
@@ -923,26 +882,29 @@ Padding(
                                 ? '${start!.toGregorian().year}-${start!.toGregorian().month}-${start!.toGregorian().day}'
                                 : jalili2Gorgian(_startController.text);
 
-                            final commison = int.parse(_commisionController.text.toEnglishDigit()); 
+                            final commison = int.parse(
+                                _commisionController.text.toEnglishDigit());
 
-                            final profit = _profitController.text.toEnglishDigit();   
+                            final profit =
+                                _profitController.text.toEnglishDigit();
                             BlocProvider.of<EditProjectBloc>(context).add(
                               EditProjectRequestEvent(
-                                  widget._project.uuid,
-                                  title,
-                                  description,
-                                  type,
-                                  status,
-                                  priority,
-                                  minInvest,
-                                  fundNeeded,
-                                  expectedProfit,
-                                  finishAt,
-                                  startAt,
-                                  keyValues,
-                                  timeTable,
-                                  shortDescription,
-                                  ifbUuid,profit),
+                                widget._project.uuid!,
+                                title,
+                                description,
+                                type,
+                                status!,
+                                priority!,
+                                minInvest,
+                                fundNeeded,
+                                expectedProfit,
+                                finishAt,
+                                startAt,
+                                keyValues,
+                                timeTable,
+                                shortDescription,
+                                profit,
+                              ),
                             );
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
@@ -990,66 +952,67 @@ Padding(
     );
   }
 
-    void _showEditDialog(BuildContext context, int index) {
-  TextEditingController titleController = TextEditingController(text: timeTable[index]['title']);
-  TextEditingController dateController = TextEditingController(text: timeTable[index]['date'].toString().toPersianDate());
-  var time;
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return AlertDialog(
-        title: Text('ویرایش'),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            TextField(
-              controller: titleController,
-              decoration: InputDecoration(labelText: 'عنوان'),
-            ),
-            TextField(
-              controller: dateController,
-              readOnly: true,
-              onTap: () async {
-                Jalali? pickedDate = await showPersianDatePicker(
-                  context: context,
-                  initialDate: Jalali.now(),
-                  firstDate: Jalali(1300, 1),
-                  lastDate: Jalali(1450, 1),
-                );
-                if (pickedDate != null) {
-                  setState(() {
-                    
-                    dateController.text = pickedDate.formatFullDate();
-                    time =  pickedDate.toGregorian().toDateTime().toString();
-                  });
-                }
+  void _showEditDialog(BuildContext context, int index) {
+    TextEditingController titleController =
+        TextEditingController(text: timeTable[index]['title']);
+    TextEditingController dateController = TextEditingController(
+        text: timeTable[index]['date'].toString().toPersianDate());
+    var time;
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('ویرایش'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextField(
+                controller: titleController,
+                decoration: InputDecoration(labelText: 'عنوان'),
+              ),
+              TextField(
+                controller: dateController,
+                readOnly: true,
+                onTap: () async {
+                  Jalali? pickedDate = await showPersianDatePicker(
+                    context: context,
+                    initialDate: Jalali.now(),
+                    firstDate: Jalali(1300, 1),
+                    lastDate: Jalali(1450, 1),
+                  );
+                  if (pickedDate != null) {
+                    setState(() {
+                      dateController.text = pickedDate.formatFullDate();
+                      time = pickedDate.toGregorian().toDateTime().toString();
+                    });
+                  }
+                },
+                decoration: InputDecoration(labelText: 'تاریخ'),
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
               },
-              decoration: InputDecoration(labelText: 'تاریخ'),
+              child: Text('لغو'),
+            ),
+            TextButton(
+              onPressed: () {
+                setState(() {
+                  // print(dateController.text);
+                  timeTable[index]['title'] = titleController.text;
+
+                  timeTable[index]['date'] = time;
+                });
+                Navigator.of(context).pop();
+              },
+              child: Text('ذخیره'),
             ),
           ],
-        ),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            child: Text('لغو'),
-          ),
-          TextButton(
-            onPressed: () {
-              setState(() {
-                // print(dateController.text);
-                timeTable[index]['title'] = titleController.text;
-
-                timeTable[index]['date'] = time;
-              });
-              Navigator.of(context).pop();
-            },
-            child: Text('ذخیره'),
-          ),
-        ],
-      );
-    },
-  );
-}
+        );
+      },
+    );
+  }
 }

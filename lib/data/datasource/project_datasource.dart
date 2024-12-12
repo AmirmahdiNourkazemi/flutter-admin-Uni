@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
@@ -25,7 +26,6 @@ abstract class IProjectsDatasource {
     List<Map<String, String>> keyValues,
     List<Map<String, String>> timeTable,
     String shortDescription,
-    String ifbUuid,
     String profit,
   );
 
@@ -46,7 +46,6 @@ abstract class IProjectsDatasource {
     List<Map<String, String>> keyValues,
     List<Map<String, String>> timeTable,
     String shortDescription,
-    String ifbUuid,
     String profit,
   );
   Future<void> UploadMedia(
@@ -54,7 +53,7 @@ abstract class IProjectsDatasource {
   Future<void> deleteMedia(String uuid, String mediaUuid);
   Future<void> deleteProject(String uuid);
   Future<void> deleteProjectForce(String uuid);
-    Future<void> restoreProject(String uuid);
+  Future<void> restoreProject(String uuid);
   Future<void> UploadVideo(String uuid, String name, PlatformFile file);
   Future<void> uploadFile(
       String uuid, String name, PlatformFile file, String collection);
@@ -65,11 +64,11 @@ class ProjectsDtasource extends IProjectsDatasource {
   @override
   Future<Root> getProjects() async {
     Response response = await _dio.get(
-      '/admin/projects',
-       options: Options(headers: {
-          'Accept': 'application/json',
-          'Authorization': 'Bearer $token',
-        }),
+      '/projects',
+      options: Options(headers: {
+        'Accept': 'application/json',
+        'Authorization': 'Bearer $token',
+      }),
     );
     if (response.statusCode == 200) {
       var responsedata = Root.fromJson(response.data);
@@ -96,12 +95,12 @@ class ProjectsDtasource extends IProjectsDatasource {
     List<Map<String, String>> keyValues,
     List<Map<String, String>> timeTable,
     String shortDescription,
-    String ifbUuid,
     String profit,
   ) async {
     try {
+      print(token);
       var response = await _dio.post(
-        '/admin/projects',
+        '/admin/project',
         data: {
           'title': title,
           'description': description,
@@ -111,21 +110,23 @@ class ProjectsDtasource extends IProjectsDatasource {
           'expected_profit': expectedProfit,
           'finish_at': finishAt,
           'start_at': startAt,
-          'properties': keyValues,
-          'time_table': timeTable,
+          'properties': keyValues, // Convert to JSON string
+          // 'time_table': timeTable,
           'short_description': shortDescription,
-          'ifb_uuid': ifbUuid,
-          'profit': profit,
+          'profit': int.parse(profit)
         },
         options: Options(headers: {
           'Accept': 'application/json',
           'Authorization': 'Bearer $token',
         }),
       );
+      print(response);
       var responsedata = ProjectResponse.fromJson(response.data);
       return responsedata;
     } on DioException catch (ex) {
       //throw Exception(ex);
+      print(ex);
+      print(ex.response?.data['message']);
       throw ApiExeption(ex.response?.data['message'], ex.response?.statusCode);
     } catch (ex) {
       print(ex);
@@ -149,7 +150,6 @@ class ProjectsDtasource extends IProjectsDatasource {
     List<Map<String, String>> keyValues,
     List<Map<String, String>> timeTable,
     String shortDescription,
-    String ifbUuid,
     String profit,
   ) async {
     try {
@@ -167,9 +167,8 @@ class ProjectsDtasource extends IProjectsDatasource {
           'finish_at': finishAt,
           'start_at': startAt,
           'properties': keyValues,
-          'time_table': timeTable,
+          // 'time_table': timeTable,
           'short_description': shortDescription,
-          'ifb_uuid': ifbUuid,
           'profit': profit,
         },
         options: Options(
@@ -204,7 +203,7 @@ class ProjectsDtasource extends IProjectsDatasource {
       });
 
       var response = await _dio.post(
-        '/admin/projects/$uuid/media',
+        '/admin/project/$uuid/media',
         data: formData,
         options: Options(contentType: 'multipart/form-data', headers: {
           'Accept': 'application/json',
@@ -236,7 +235,7 @@ class ProjectsDtasource extends IProjectsDatasource {
   @override
   Future<void> deleteProject(String uuid) async {
     try {
-      await _dio.delete('/admin/projects/$uuid',
+      await _dio.delete('/admin/project/$uuid',
           options: Options(headers: {
             'Accept': 'application/json',
             'Authorization': 'Bearer $token',
@@ -248,8 +247,7 @@ class ProjectsDtasource extends IProjectsDatasource {
     }
   }
 
-
-   Future<void> restoreProject(String uuid) async {
+  Future<void> restoreProject(String uuid) async {
     try {
       await _dio.put('/admin/projects/$uuid/restore',
           options: Options(headers: {
@@ -262,6 +260,7 @@ class ProjectsDtasource extends IProjectsDatasource {
       throw ApiExeption('unknown error happend', 0);
     }
   }
+
   Future<void> deleteProjectForce(String uuid) async {
     try {
       await _dio.delete('/admin/projects/$uuid/force',
@@ -275,6 +274,7 @@ class ProjectsDtasource extends IProjectsDatasource {
       throw ApiExeption('unknown error happend', 0);
     }
   }
+
   @override
   Future<void> UploadVideo(String uuid, String name, PlatformFile file) async {
     // final fileName = file.path!.split('/').last;

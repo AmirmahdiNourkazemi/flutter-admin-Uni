@@ -26,9 +26,7 @@ abstract class IProjectsRepository {
     List<Map<String, String>> keyValues,
     List<Map<String, String>> timeTable,
     String shortDescription,
-    String ifbUuid,
- 
-    String profit,
+   String profit,
   );
 
   ///
@@ -49,9 +47,8 @@ abstract class IProjectsRepository {
     List<Map<String, String>> keyValues,
       List<Map<String, String>> timeTable,
     String shortDescription,
-    String ifbUuid,
-   
     String profit,
+   
   );
   ////////
   Future<Either<String, String>> UploadMedia(
@@ -97,8 +94,8 @@ class ProjectsRepository extends IProjectsRepository {
       List<Map<String, String>> keyValues,
         List<Map<String, String>> timeTable,
       String shortDescription,
-      String ifbUuid,
-    String profit,) async {
+      String profit,
+     ) async {
     try {
       var response = await _projectsDatasource.createProject(
           title,
@@ -113,7 +110,8 @@ class ProjectsRepository extends IProjectsRepository {
           keyValues,
           timeTable,
           shortDescription,
-          ifbUuid,profit);
+          profit,
+         );
       return right(response);
     } on ApiExeption catch (ex) {
       return left(ex.getFarsiMessage());
@@ -136,8 +134,8 @@ class ProjectsRepository extends IProjectsRepository {
       List<Map<String, String>> keyValues,
       List<Map<String, String>> timeTable,
       String shortDescription,
-      String ifbUuid,
-    String profit,) async {
+      String profit,
+     ) async {
     try {
       await _projectsDatasource.UpdateProject(
         uuid,
@@ -154,8 +152,6 @@ class ProjectsRepository extends IProjectsRepository {
         keyValues,
         timeTable,
         shortDescription,
-        ifbUuid,
-        
         profit,
       );
       return right('پروژه با موفقیت ادیت شد');

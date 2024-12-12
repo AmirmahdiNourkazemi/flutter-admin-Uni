@@ -27,7 +27,6 @@ class CreateProjectBloc extends Bloc<CreateProjectEvent, CreateProjectState> {
             event.keyValues,
             event.timeTable,
             event.shortDescription,
-            event.ifbUuid,
             event.profit,
           );
           emit(CreateProjectResponseState(response));

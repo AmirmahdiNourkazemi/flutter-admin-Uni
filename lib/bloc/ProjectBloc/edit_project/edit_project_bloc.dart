@@ -29,8 +29,7 @@ class EditProjectBloc extends Bloc<EditProjectEvent, EditProjectState> {
             event.keyValues,
             event.timeTable,
             event.shortDescription,
-            event.ifbUuid,
-            event.profit,
+            event.profit
           );
           emit(EditProjectResponseState(response));
           emit(EditProjectLoadingState());
