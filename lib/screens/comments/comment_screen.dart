@@ -138,12 +138,12 @@ class _CommentScreenState extends State<CommentScreen> {
                                   ),
                                   DataCell(
                                     Text(
-                                      comment.verified
+                                      comment.verified == 1
                                           ? 'تایید شده'
                                           : 'تایید نشده',
                                       softWrap: true,
                                       style: TextStyle(
-                                          color: comment.verified
+                                          color: comment.verified == 1
                                               ? Colors.blue
                                               : Colors.red,
                                           fontSize:
@@ -158,7 +158,7 @@ class _CommentScreenState extends State<CommentScreen> {
                                   ),
                                   DataCell(ElevatedButton(
                                     style: ElevatedButton.styleFrom(
-                                        backgroundColor: comment.verified
+                                        backgroundColor: comment.verified == 1
                                             ? Colors.grey
                                             : null),
                                     child: Text(
@@ -168,7 +168,7 @@ class _CommentScreenState extends State<CommentScreen> {
                                           .titleSmall,
                                     ),
                                     onPressed: () {
-                                      comment.verified == false
+                                      comment.verified == 0
                                           ? BlocProvider.of<CommentBloc>(
                                                   context)
                                               .add(CommentChangeVerifyEvent(
@@ -186,7 +186,7 @@ class _CommentScreenState extends State<CommentScreen> {
                                         Container()), // Empty cell for alignment
                                     DataCell(
                                         Container()), // Empty cell for alignment
-                                    DataCell(Text(
+                                    const DataCell(Text(
                                       'پاسخ‌ها:',
                                       style: TextStyle(
                                           fontSize: 18,
@@ -243,12 +243,12 @@ class _CommentScreenState extends State<CommentScreen> {
                                       ),
                                       DataCell(
                                         Text(
-                                          reply.verified
+                                          reply.verified == 1
                                               ? 'تایید شده'
                                               : 'تایید نشده',
                                           softWrap: true,
                                           style: TextStyle(
-                                            color: reply.verified
+                                            color: reply.verified == 1
                                                 ? Colors.blue
                                                 : Colors.red,
                                             fontSize: 12.0,
@@ -259,7 +259,7 @@ class _CommentScreenState extends State<CommentScreen> {
                                       ),
                                       DataCell(ElevatedButton(
                                         style: ElevatedButton.styleFrom(
-                                            backgroundColor: reply.verified
+                                            backgroundColor: reply.verified == 1
                                                 ? Colors.grey
                                                 : null),
                                         child: Text(
@@ -269,13 +269,10 @@ class _CommentScreenState extends State<CommentScreen> {
                                               .titleSmall,
                                         ),
                                         onPressed: () {
-                                          reply.verified == false
-                                              ? BlocProvider.of<CommentBloc>(
-                                                      context)
-                                                  .add(CommentChangeVerifyEvent(
-                                                      widget._project.uuid!,
-                                                      reply.uuid))
-                                              : null;
+                                          BlocProvider.of<CommentBloc>(context)
+                                              .add(CommentChangeVerifyEvent(
+                                                  widget._project.uuid!,
+                                                  reply.uuid));
                                         },
                                       )),
                                     ]);

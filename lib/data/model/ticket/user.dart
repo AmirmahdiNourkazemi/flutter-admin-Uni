@@ -10,14 +10,14 @@ class User {
   String? idCode;
   String uuid;
   String? fullName;
-  bool isAdmin;
+  int? isAdmin;
   // bool verified;
   int? wallet;
   String createdAt;
   String updatedAt;
   dynamic deletedAt;
-  PrivatePersonInfo? privatePersonInfo;
-  LegalPersonInfo? legalPersonInfo;
+  // PrivatePersonInfo? privatePersonInfo;
+  // LegalPersonInfo? legalPersonInfo;
   // List<Invites>? invites;
   //List<Iban>? ibans;
 
@@ -36,8 +36,8 @@ class User {
     required this.createdAt,
     required this.updatedAt,
     this.deletedAt,
-    this.privatePersonInfo,
-    this.legalPersonInfo,
+    // this.privatePersonInfo,
+    // this.legalPersonInfo,
 
     // this.invites,
     //this.ibans,
@@ -63,12 +63,12 @@ class User {
       createdAt: json['created_at'],
       updatedAt: json['updated_at'],
       deletedAt: json['deleted_at'],
-      privatePersonInfo: json['private_person_info'] != null
-          ? PrivatePersonInfo.fromJson(json['private_person_info'])
-          : null,
-      legalPersonInfo: json['legal_person_info'] != null
-          ? LegalPersonInfo.fromJson(json['legal_person_info'])
-          : null,
+      // privatePersonInfo: json['private_person_info'] != null
+      //     ? PrivatePersonInfo.fromJson(json['private_person_info'])
+      //     : null,
+      // legalPersonInfo: json['legal_person_info'] != null
+      //     ? LegalPersonInfo.fromJson(json['legal_person_info'])
+      //     : null,
 
       //  invites: invitesList,
       // ibans: ibanList,

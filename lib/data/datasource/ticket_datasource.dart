@@ -12,7 +12,7 @@ import '../model/ticket_uuid/get_ticket.dart';
 
 abstract class ITicketDataSource {
   Future<Pagination> getTicket(
-      int perPage, int page, int? status, int? category , String? mobile);
+      int perPage, int page, int? status, int? category, String? mobile);
   Future<void> changeTicketStatus(int status, String uuid);
   Future<GetTicket> uuidTicket(String uuid);
   Future<void> sendMessage(
@@ -26,7 +26,7 @@ class TicketDatasource extends ITicketDataSource {
   final Dio _dio = locator.get();
   String token = AuthMnager.readAuth();
   Future<Pagination> getTicket(
-      int perPage, int page, int? status, int? category , String? mobile) async {
+      int perPage, int page, int? status, int? category, String? mobile) async {
     try {
       var response = await _dio.get(
         '/admin/tickets',
@@ -35,7 +35,7 @@ class TicketDatasource extends ITicketDataSource {
           'page': page,
           'category': category,
           'status': status,
-          'search':mobile
+          'search': mobile
         },
         options: Options(headers: {
           'Accept': 'application/json',
@@ -90,7 +90,7 @@ class TicketDatasource extends ITicketDataSource {
   Future<void> sendMessage(String uuid, String text) async {
     try {
       var response = await _dio.post(
-        '/admin/tickets/$uuid/messages',
+        '/admin/tickets/$uuid/message',
         data: {'text': text},
         options: Options(
           headers: {

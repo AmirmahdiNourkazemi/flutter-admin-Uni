@@ -9,11 +9,11 @@ class CommentData {
   String uuid;
   String commentableType;
   String commentableId;
-  bool verified;
+  int verified;
   String createdAt;
   String updatedAt;
   User user;
-   List<Reply>? replies;
+  List<Reply>? replies;
 
   CommentData({
     required this.id,
@@ -27,7 +27,7 @@ class CommentData {
     required this.createdAt,
     required this.updatedAt,
     required this.user,
-     this.replies,
+    this.replies,
   });
 
   factory CommentData.fromJson(Map<String, dynamic> json) {
@@ -43,7 +43,7 @@ class CommentData {
       createdAt: json['created_at'],
       updatedAt: json['updated_at'],
       user: User.fromJson(json['user']),
-       replies: json['replies'] != null
+      replies: json['replies'] != null
           ? List<Reply>.from(json['replies'].map((x) => Reply.fromJson(x)))
           : [],
     );
