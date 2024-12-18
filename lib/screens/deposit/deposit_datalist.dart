@@ -416,11 +416,11 @@ class _DepositScreenState extends State<DepositScreen> {
                                           InkWell(
                                             onTap: () {
                                               Clipboard.setData(ClipboardData(
-                                                  text: withdraw.user!.fullName
+                                                  text: withdraw.user!.name
                                                       .toString()));
                                             },
                                             child: Text(
-                                              withdraw.user!.fullName!,
+                                              withdraw.user!.name!,
                                             ),
                                           ),
                                         ),

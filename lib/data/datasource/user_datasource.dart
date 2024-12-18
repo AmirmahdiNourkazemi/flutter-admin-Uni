@@ -10,13 +10,15 @@ import '../model/users/userResponse.dart';
 
 abstract class IUserDatasource {
   Future<UserResponse> getUsers(
-      String? search,
-      int perPage,
-      int page,
-      int? paid,
-      int? completedProfile,
-      int? notEmptyWallet,
-      int? hasSellingTrade,String? projectUUid,);
+    String? search,
+    int perPage,
+    int page,
+    int? paid,
+    int? completedProfile,
+    int? notEmptyWallet,
+    int? hasSellingTrade,
+    String? projectUUid,
+  );
   Future<UserResponse> getMobileUsers(String mobile);
   Future<UserResponse> getPaid(int perPage, int page, int paid);
   Future<String> getExcelUsers(String? mobile, int? paid, int? completedProfile,
@@ -59,10 +61,11 @@ class UserDatasource extends IUserDatasource {
       int? paid,
       int? completedProfile,
       int? notEmptyWallet,
-      int? hasSellingTrade , String? projectUUid) async {
+      int? hasSellingTrade,
+      String? projectUUid) async {
     try {
       var response = await _dio.get(
-        '/admin/users',
+        '/admin/user',
         queryParameters: {
           'search': search,
           'per_page': perPage,
@@ -70,8 +73,8 @@ class UserDatasource extends IUserDatasource {
           'paid': paid,
           'completed_profile': completedProfile,
           'not_empty_wallet': notEmptyWallet,
-           'has_inviter': hasSellingTrade,
-           'project_uuid': projectUUid,
+          'has_inviter': hasSellingTrade,
+          'project_uuid': projectUUid,
         },
         options: Options(
           headers: {
@@ -236,7 +239,7 @@ class UserDatasource extends IUserDatasource {
 
   @override
   Future<String> getExcelUsers(String? mobile, int? paid, int? completedProfile,
-      int? notEmptyWallet, int? hasSellingTrade,String? projectUUid) async {
+      int? notEmptyWallet, int? hasSellingTrade, String? projectUUid) async {
     try {
       var response = await _dio.get('/admin/users/excel/export',
           options: Options(

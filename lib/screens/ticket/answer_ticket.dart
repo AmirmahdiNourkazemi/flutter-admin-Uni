@@ -271,7 +271,7 @@ class _AnswerScreenState extends State<AnswerScreen> {
                                               width: 3,
                                             ),
                                             Text(
-                                              widget._getTicket.user.fullName!,
+                                              widget._getTicket.user.name!,
                                               style: Theme.of(context)
                                                   .textTheme
                                                   .titleSmall,
@@ -351,11 +351,15 @@ class _AnswerScreenState extends State<AnswerScreen> {
                                                   ),
                                                 ],
                                                 borderRadius: BorderRadius.only(
-                                                  topRight: message.user.isAdmin
+                                                  topRight: message
+                                                              .user.isAdmin ==
+                                                          1
                                                       ? const Radius.circular(0)
                                                       : const Radius.circular(
                                                           10),
-                                                  topLeft: message.user.isAdmin
+                                                  topLeft: message
+                                                              .user.isAdmin ==
+                                                          1
                                                       ? const Radius.circular(
                                                           10)
                                                       : const Radius.circular(
@@ -365,7 +369,7 @@ class _AnswerScreenState extends State<AnswerScreen> {
                                                   bottomRight:
                                                       const Radius.circular(10),
                                                 ),
-                                                color: message.user.isAdmin
+                                                color: message.user.isAdmin == 1
                                                     ? Colors.blue.shade100
                                                     : Colors.white,
                                               ),
@@ -388,8 +392,7 @@ class _AnswerScreenState extends State<AnswerScreen> {
                                                             width: 3,
                                                           ),
                                                           Text(
-                                                            message
-                                                                .user.fullName!,
+                                                            message.user.name!,
                                                             style:
                                                                 const TextStyle(
                                                               fontSize: 13,

@@ -120,7 +120,7 @@ class _CommentScreenState extends State<CommentScreen> {
                                   ),
                                   DataCell(
                                     Text(
-                                      comment.user.fullName!,
+                                      comment.user.name!,
                                       softWrap: true,
                                       style: Theme.of(context)
                                           .textTheme
@@ -219,7 +219,7 @@ class _CommentScreenState extends State<CommentScreen> {
                                           padding:
                                               const EdgeInsets.only(right: 20),
                                           child: Text(
-                                            reply.user.fullName ?? '',
+                                            reply.user.name ?? '',
                                             softWrap: true,
                                             style: Theme.of(context)
                                                 .textTheme

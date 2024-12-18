@@ -8,18 +8,18 @@ class User {
   String? email;
   String? mobile;
   String? nationalCode;
-  String? idCode;
+  // String? idCode;
   String uuid;
-  String? fullName;
-  bool isAdmin;
+  String? name;
+  int isAdmin;
   // bool verified;
   int? wallet;
   String createdAt;
   String updatedAt;
   dynamic deletedAt;
-  PrivatePersonInfo? privatePersonInfo;
-  LegalPersonInfo? legalPersonInfo;
-  Inviter? inviter;
+  // PrivatePersonInfo? privatePersonInfo;
+  // LegalPersonInfo? legalPersonInfo;
+  // Inviter? inviter;
   //List<Iban>? ibans;
 
   User({
@@ -28,19 +28,19 @@ class User {
     this.email,
     this.mobile,
     this.nationalCode,
-    this.idCode,
+    // this.idCode,
     required this.uuid,
     required this.isAdmin,
-    this.fullName,
+    this.name,
     // required this.verified,
     this.wallet,
     required this.createdAt,
     required this.updatedAt,
     this.deletedAt,
-    this.privatePersonInfo,
-    this.legalPersonInfo,
+    // this.privatePersonInfo,
+    // this.legalPersonInfo,
 
-    this.inviter,
+    // this.inviter,
     //this.ibans,
   });
 
@@ -55,8 +55,8 @@ class User {
       email: json['email'],
       mobile: json['mobile'] ?? 'نامشخص',
       nationalCode: json['national_code'] ?? 'نامشخص',
-      idCode: json['id_code'],
-      fullName: json['full_name'] ?? 'نامشخص',
+      // idCode: json['id_code'],
+      name: json['name'] ?? 'نامشخص',
       uuid: json['uuid'],
       isAdmin: json['is_admin'],
       //verified: json['user']['verified'],
@@ -64,15 +64,15 @@ class User {
       createdAt: json['created_at'],
       updatedAt: json['updated_at'],
       deletedAt: json['deleted_at'],
-      privatePersonInfo: json['private_person_info'] != null
-          ? PrivatePersonInfo.fromJson(json['private_person_info'])
-          : null,
-      legalPersonInfo: json['legal_person_info'] != null
-          ? LegalPersonInfo.fromJson(json['legal_person_info'])
-          : null,
-        inviter: json['inviter'] != null
-          ? Inviter.fromJson(json['inviter'])
-          : null,
+      // privatePersonInfo: json['private_person_info'] != null
+      //     ? PrivatePersonInfo.fromJson(json['private_person_info'])
+      //     : null,
+      // legalPersonInfo: json['legal_person_info'] != null
+      //     ? LegalPersonInfo.fromJson(json['legal_person_info'])
+      //     : null,
+      //   inviter: json['inviter'] != null
+      //     ? Inviter.fromJson(json['inviter'])
+      //     : null,
       //  invites: invitesList,
       // ibans: ibanList,
     );

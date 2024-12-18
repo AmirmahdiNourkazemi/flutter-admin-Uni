@@ -176,42 +176,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                     return bloc;
                                   },
                                 ),
-                                BlocProvider(
-                                  create: (context) {
-                                    final PivotBloc bloc = PivotBloc();
-                                    bloc.add(PivotStartEvent());
-                                    return bloc;
-                                  },
-                                ),
-                                BlocProvider(
-                                  create: (context) {
-                                    final SendSmsBloc bloc = SendSmsBloc();
-                                    bloc.add(SendSmsStartEvent());
-                                    return bloc;
-                                  },
-                                ),
-                                BlocProvider(
-                                  create: (context) {
-                                    final MessageTemplateBloc bloc =
-                                        MessageTemplateBloc();
-                                    bloc.add(MessageTemplateStartEvent());
-                                    return bloc;
-                                  },
-                                ),
-                                BlocProvider(
-                                  create: (context) {
-                                    final ExcelBloc bloc = ExcelBloc();
-                                    bloc.add(ExcelInitEvent());
-                                    return bloc;
-                                  },
-                                ),
-                                BlocProvider(
-                                  create: (context) {
-                                    final ProjectBloc bloc = ProjectBloc();
-                                    bloc.add(ProjectStartEvent());
-                                    return bloc;
-                                  },
-                                )
                               ],
                               child: Padding(
                                 padding: EdgeInsets.only(
