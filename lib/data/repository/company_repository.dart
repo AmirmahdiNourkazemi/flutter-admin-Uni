@@ -4,8 +4,10 @@ import 'package:admin_smartfunding/di/di.dart';
 import 'package:admin_smartfunding/utils/apiExeption.dart';
 import 'package:dartz/dartz.dart';
 
+import '../model/company/company.dart';
+
 abstract class ICompanyRespository {
-Future<Either<String , RootCompany>> getCompany();
+Future<Either<String , List<Company>>> getCompany();
 
 }
 
@@ -13,7 +15,7 @@ Future<Either<String , RootCompany>> getCompany();
 class CompanyRespository extends ICompanyRespository {
    final ICompanyDatasource _companyDatasource = locator.get();
   @override
-  Future<Either<String, RootCompany>> getCompany() async{
+  Future<Either<String, List<Company>>> getCompany() async{
    try {
      var res  = await _companyDatasource.getCompany();
      return Right(res);

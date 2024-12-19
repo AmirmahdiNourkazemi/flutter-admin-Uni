@@ -117,7 +117,7 @@ class Company {
   final int id;
   final int userId;
   final String title;
-  final String description;
+  final String? description;
   final String uuid;
   final String createdAt;
   final String updatedAt;
@@ -125,7 +125,7 @@ class Company {
   final String agentName;
   final String field;
   final String phoneNumber;
- final FundNeededType fundNeeded;
+  final FundNeededType fundNeeded;
   final AnnualIncomeType annualIncome;
   final ProfitType profit;
   final BouncedCheckType bouncedCheck;
@@ -134,7 +134,7 @@ class Company {
     required this.id,
     required this.userId,
     required this.title,
-    required this.description,
+    this.description,
     required this.uuid,
     required this.createdAt,
     required this.updatedAt,
@@ -166,25 +166,5 @@ class Company {
       profit: ProfitTypeExtension.fromValue(json['profit']),
       bouncedCheck: BouncedCheckTypeExtension.fromValue(json['bounced_check']),
     );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'user_id': userId,
-      'title': title,
-      'description': description,
-      'uuid': uuid,
-      'created_at': createdAt,
-      'updated_at': updatedAt,
-      'deleted_at': deletedAt,
-      'agent_name': agentName,
-      'field': field,
-      'phone_number': phoneNumber,
-      'fund_needed': fundNeeded.index + 1,
-      'anual_income': annualIncome,
-      'profit': profit,
-      'bounced_check': bouncedCheck,
-    };
   }
 }

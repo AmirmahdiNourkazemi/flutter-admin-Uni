@@ -57,61 +57,66 @@ class _CompanyScreenState extends State<CompanyScreen> {
                 size: 28),
           ),
         ),
-        body: ListView(children: [
-          BlocBuilder<CompanyBloc, CompanyState>(builder: (context, state) {
-          if (state is CompanyLoadingState) {
-            return const Center(child: CircularProgressIndicator());
-          } else {
-            if (state is CompanyResponseState) {
-              return state.getCompany.fold((l) => Center(child: Text(l)),
-                  (rootCompany) {
-                return SingleChildScrollView(
-                  scrollDirection: Responsive.isDesktop(context) ? Axis.vertical :Axis.horizontal,
-                  child: DataTable(
-                    
-                    dataTextStyle: Theme.of(context).textTheme.titleSmall,
-                    headingTextStyle: Theme.of(context).textTheme.titleMedium,
-                    columnSpacing: 20,
-                  
-                    showBottomBorder: true,
-                    columns: const [
-                                 
-                      DataColumn(label: Text('نام شرکت')),
-                      DataColumn(label: Text('توضیحات')),
-                   
-                      DataColumn(label: Text('تاریخ ارسال')),
-                                 
-                              
-                      DataColumn(label: Text('نام نماینده')),
-                      DataColumn(label: Text('زمینه فعالیت')),
-                      DataColumn(label: Text('شماره موبایل')),
-                      DataColumn(label: Text('سرمایه مورد نیاز')),
-                      DataColumn(label: Text('درآمد سالیانه')),
-                      DataColumn(label: Text('وضعیت سود و زیان شرکت در سال گذشته')),
-                      DataColumn(label: Text('وضعیت چک برگشتی سرمایه‌پذیر و اعضای هیئت مدیره')),
-                    ],
-                    rows: rootCompany.data!.map((company) {
-                      return DataRow(cells: [
-                        DataCell(Text(company.title)),
-                        DataCell(Text(company.description)),
-                        DataCell(Text(company.createdAt.toPersianDate())),         
-                        DataCell(Text(company.agentName)),
-                        DataCell(Text(company.field)),
-                        DataCell(Text(company.phoneNumber.toPersianDigit())),
-                        DataCell(Text(company.fundNeeded.description)),
-                        DataCell(Text(company.annualIncome.description)),
-                        DataCell(Text(company.profit.description)),
-                        DataCell(Text(company.bouncedCheck.description)),
-                      ]);
-                    }).toList(),
-                  ),
-                );
-              });
-            }
-            return Container();
-          }
-        })
-        ],),
+        body: ListView(
+          children: [
+            BlocBuilder<CompanyBloc, CompanyState>(builder: (context, state) {
+              if (state is CompanyLoadingState) {
+                return const Center(child: CircularProgressIndicator());
+              } else {
+                if (state is CompanyResponseState) {
+                  return state.getCompany.fold((l) => Center(child: Text(l)),
+                      (rootCompany) {
+                    return SingleChildScrollView(
+                      scrollDirection: Responsive.isDesktop(context)
+                          ? Axis.vertical
+                          : Axis.horizontal,
+                      child: DataTable(
+                        dataTextStyle: Theme.of(context).textTheme.titleSmall,
+                        headingTextStyle:
+                            Theme.of(context).textTheme.titleMedium,
+                        columnSpacing: 20,
+                        showBottomBorder: true,
+                        columns: const [
+                          DataColumn(label: Text('نام شرکت')),
+                          DataColumn(label: Text('توضیحات')),
+                          DataColumn(label: Text('تاریخ ارسال')),
+                          DataColumn(label: Text('نام نماینده')),
+                          DataColumn(label: Text('زمینه فعالیت')),
+                          DataColumn(label: Text('شماره موبایل')),
+                          DataColumn(label: Text('سرمایه مورد نیاز')),
+                          DataColumn(label: Text('درآمد سالیانه')),
+                          DataColumn(
+                              label:
+                                  Text('وضعیت سود و زیان شرکت در سال گذشته')),
+                          DataColumn(
+                              label: Text(
+                                  'وضعیت چک برگشتی سرمایه‌پذیر و اعضای هیئت مدیره')),
+                        ],
+                        rows: rootCompany.map((company) {
+                          return DataRow(cells: [
+                            DataCell(Text(company.title)),
+                            DataCell(
+                                Text(company.description ?? 'بدون توضیحات')),
+                            DataCell(Text(company.createdAt.toPersianDate())),
+                            DataCell(Text(company.agentName)),
+                            DataCell(Text(company.field)),
+                            DataCell(
+                                Text(company.phoneNumber.toPersianDigit())),
+                            DataCell(Text(company.fundNeeded.description)),
+                            DataCell(Text(company.annualIncome.description)),
+                            DataCell(Text(company.profit.description)),
+                            DataCell(Text(company.bouncedCheck.description)),
+                          ]);
+                        }).toList(),
+                      ),
+                    );
+                  });
+                }
+                return Container();
+              }
+            })
+          ],
+        ),
       ),
     );
   }
