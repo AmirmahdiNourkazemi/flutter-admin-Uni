@@ -60,7 +60,7 @@ class User {
       uuid: json['uuid'],
       isAdmin: json['is_admin'],
       //verified: json['user']['verified'],
-      wallet: json['wallet'],
+      // wallet: json['wallet'],
       createdAt: json['created_at'],
       updatedAt: json['updated_at'],
       deletedAt: json['deleted_at'],

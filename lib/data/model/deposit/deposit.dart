@@ -56,19 +56,4 @@ class Deposit {
           : null, 
     );
   }
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'user_id': userId,
-      'amount': amount,
-      'status': status,
-      'uuid': uuid,
-      'ref_id': refId,
-      'deposit_date': depositDate,
-      'created_at': createdAt,
-      'updated_at': updatedAt,
-      'images': image,
-      'user': user,
-    };
-  }
 }

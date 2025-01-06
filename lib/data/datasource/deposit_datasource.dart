@@ -18,8 +18,7 @@ class DepositDatasource extends IDepositDtasource {
   @override
   Future<DepositData> getDeposit(
       String? mobile, int per_page, int? status, int page) async {
-    try {
-      var response = await _dio.get(
+        var response = await _dio.get(
         '/admin/deposits',
         queryParameters: status == null
             ? {
@@ -46,12 +45,25 @@ class DepositDatasource extends IDepositDtasource {
           },
         ),
       );
-      return DepositData.fromJson(response.data);
-    } on DioException catch (ex) {
-      throw ApiExeption(ex.response?.data['message'], ex.response?.statusCode);
-    } catch (ex) {
-      throw Exception(ex.toString());  
-    }
+      if (response.statusCode == 200) {
+        var res = DepositData.fromJson(response.data);
+        print(res);
+        return res;
+        
+      }else {
+        throw Exception();
+      }
+    // try {
+      
+       
+      
+     
+      
+    // } on DioException catch (ex) {
+    //   throw ApiExeption(ex.response?.data['message'], ex.response?.statusCode);
+    // } catch (ex) {
+    //   throw Exception(ex.toString());  
+    // }
   }
 
   @override

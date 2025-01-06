@@ -7,7 +7,7 @@ class DepositData {
   final int? from;
   final int lastPage;
   final String lastPageUrl;
-  final List<Link>? links; // Nullable in case it doesn't exist
+  // final List<Link>? links; // Nullable in case it doesn't exist
   final String path;
   final int perPage;
   final String? nextPageUrl; // Already nullable
@@ -22,7 +22,7 @@ class DepositData {
     this.from,
     required this.lastPage,
     required this.lastPageUrl,
-    this.links, // Made nullable
+    // this.links, // Made nullable
     required this.path,
     required this.perPage,
     this.nextPageUrl,
@@ -34,18 +34,14 @@ class DepositData {
   factory DepositData.fromJson(Map<String, dynamic> json) {
     return DepositData(
       currentPage: json['current_page'],
-      data: json['data'] != null
-          ? (json['data'] as List)
-              .map((item) => Deposit.fromJson(item))
-              .toList()
-          : null, // Handle nullable data
+      data:(json['data'] as List?)?.map((item) => Deposit.fromJson(item)).toList(), // Handle nullable data
       firstPageUrl: json['first_page_url'],
       from: json['from'],
       lastPage: json['last_page'],
       lastPageUrl: json['last_page_url'],
-      links: json['links'] != null
-          ? (json['links'] as List).map((item) => Link.fromJson(item)).toList()
-          : null, // Handle nullable links
+      // links: json['links'] != null
+      //     ? (json['links'] as List).map((item) => Link.fromJson(item)).toList()
+      //     : null, // Handle nullable links
       path: json['path'],
       perPage: json['per_page'],
       nextPageUrl: json['next_page_url'],
@@ -55,27 +51,7 @@ class DepositData {
     );
   }
 
-  Map<String, dynamic> toJson() {
-    return {
-      'current_page': currentPage,
-      'data': data != null
-          ? data!.map((item) => item.toJson()).toList()
-          : [], // Return empty list if null
-      'first_page_url': firstPageUrl,
-      'from': from,
-      'last_page': lastPage,
-      'last_page_url': lastPageUrl,
-      'links': links != null
-          ? links!.map((item) => item.toJson()).toList()
-          : [], // Return empty list if null
-      'path': path,
-      'per_page': perPage,
-      'next_page_url': nextPageUrl,
-      'prev_page_url': prevPageUrl,
-      'to': to,
-      'total': total,
-    };
-  }
+
 }
 
 class Link {

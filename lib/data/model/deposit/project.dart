@@ -4,18 +4,18 @@ class Project {
   final int id;
   final String title;
   final String uuid;
-  final List<ImageData> images;
-  final List<Attachment> attachments;
-  final int progressBar;
+  final List<ImageData>? images;
+  final List<Attachment>? attachments;
+  // final int progressBar;
   final String? contract; // Nullable
 
   Project({
     required this.id,
     required this.title,
     required this.uuid,
-    required this.images,
-    required this.attachments,
-    required this.progressBar,
+     this.images,
+     this.attachments,
+    // required this.progressBar,
     this.contract, // Nullable
   });
 
@@ -24,13 +24,13 @@ class Project {
       id: json['id'],
       title: json['title'],
       uuid: json['uuid'],
-      images: (json['images'] as List<dynamic>)
+      images: (json['attachments']) != null ? (json['images'] as List<dynamic>)
           .map((image) => ImageData.fromJson(image))
-          .toList(),
-      attachments: (json['attachments'] as List<dynamic>)
+          .toList() : [],
+      attachments: (json['attachments']) != null ? (json['attachments'] as List<dynamic>)
           .map((attachment) => Attachment.fromJson(attachment))
-          .toList(),
-      progressBar: json['progress_bar'],
+          .toList(): [],
+      // progressBar: json['progress_bar'],
       contract: json['contract'] is String
           ? json['contract']
           : json['contract']?.toString(), // Nullable
@@ -43,10 +43,10 @@ class Project {
       'id': id,
       'title': title,
       'uuid': uuid,
-      'images': images.map((image) => image.toJson()).toList(),
+      'images': images != null ? images!.map((image) => image.toJson()).toList() : [],
       'attachments':
-          attachments.map((attachment) => attachment.toJson()).toList(),
-      'progress_bar': progressBar,
+         attachments != null ?  attachments!.map((attachment) => attachment.toJson()).toList() : [],
+      
       'contract': contract,
     };
   }
