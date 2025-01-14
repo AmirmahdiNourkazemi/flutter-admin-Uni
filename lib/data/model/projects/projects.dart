@@ -15,8 +15,8 @@ class Project {
   num? minInvest;
   num? fundNeeded;
   int? fundAchieved;
-  int? expectedProfit;
-  int? profit;
+  String? expectedProfit;
+  String? profit;
   int? priority;
   String? uuid;
   String? finishAt;

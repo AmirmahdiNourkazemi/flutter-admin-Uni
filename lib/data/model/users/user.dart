@@ -11,7 +11,7 @@ class User {
   // String? idCode;
   String uuid;
   String? name;
-  int isAdmin;
+  bool isAdmin;
   // bool verified;
   int? wallet;
   String createdAt;

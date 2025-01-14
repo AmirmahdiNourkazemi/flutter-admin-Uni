@@ -30,7 +30,7 @@ Future<void> getItInit() async {
   String token = AuthMnager.readAuth();
   locator.registerSingleton<Dio>(
     Dio(
-      BaseOptions(baseUrl: 'http://127.0.0.1:8000/api', headers: {
+      BaseOptions(baseUrl: 'http://194.48.198.227:9000/api', headers: {
         'Accept': 'application/json',
         'Authorization': 'Bearer $token',
         'Access-Control-Allow-Origin': '*',
