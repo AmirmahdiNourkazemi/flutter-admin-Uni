@@ -4,7 +4,7 @@ import 'private_person.dart';
 
 class User {
   int id;
-  int? type;
+  bool? type;
   String? email;
   String? mobile;
   String? nationalCode;

@@ -3,14 +3,14 @@ import '../users/private_person.dart';
 
 class User {
   int id;
-  int? type;
+  bool? type;
   String? email;
   String? mobile;
   String? nationalCode;
   String? idCode;
   String uuid;
   String? fullName;
-  int? isAdmin;
+  bool? isAdmin;
   // bool verified;
   int? wallet;
   String createdAt;

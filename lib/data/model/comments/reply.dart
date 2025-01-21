@@ -8,7 +8,7 @@ class Reply {
   String uuid;
   String commentableType;
   String commentableId;
-  int verified;
+  bool verified;
   String createdAt;
   String updatedAt;
   User user;

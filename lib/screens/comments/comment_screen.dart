@@ -138,12 +138,12 @@ class _CommentScreenState extends State<CommentScreen> {
                                   ),
                                   DataCell(
                                     Text(
-                                      comment.verified == 1
+                                      comment.verified == true
                                           ? 'تایید شده'
                                           : 'تایید نشده',
                                       softWrap: true,
                                       style: TextStyle(
-                                          color: comment.verified == 1
+                                          color: comment.verified == true
                                               ? Colors.blue
                                               : Colors.red,
                                           fontSize:
@@ -158,9 +158,10 @@ class _CommentScreenState extends State<CommentScreen> {
                                   ),
                                   DataCell(ElevatedButton(
                                     style: ElevatedButton.styleFrom(
-                                        backgroundColor: comment.verified == 1
-                                            ? Colors.grey
-                                            : null),
+                                        backgroundColor:
+                                            comment.verified == true
+                                                ? Colors.grey
+                                                : null),
                                     child: Text(
                                       'تغییر وضعیت',
                                       style: Theme.of(context)
@@ -168,7 +169,7 @@ class _CommentScreenState extends State<CommentScreen> {
                                           .titleSmall,
                                     ),
                                     onPressed: () {
-                                      comment.verified == 0
+                                      comment.verified == false
                                           ? BlocProvider.of<CommentBloc>(
                                                   context)
                                               .add(CommentChangeVerifyEvent(
@@ -243,12 +244,12 @@ class _CommentScreenState extends State<CommentScreen> {
                                       ),
                                       DataCell(
                                         Text(
-                                          reply.verified == 1
+                                          reply.verified == true
                                               ? 'تایید شده'
                                               : 'تایید نشده',
                                           softWrap: true,
                                           style: TextStyle(
-                                            color: reply.verified == 1
+                                            color: reply.verified == true
                                                 ? Colors.blue
                                                 : Colors.red,
                                             fontSize: 12.0,
@@ -259,9 +260,10 @@ class _CommentScreenState extends State<CommentScreen> {
                                       ),
                                       DataCell(ElevatedButton(
                                         style: ElevatedButton.styleFrom(
-                                            backgroundColor: reply.verified == 1
-                                                ? Colors.grey
-                                                : null),
+                                            backgroundColor:
+                                                reply.verified == true
+                                                    ? Colors.grey
+                                                    : null),
                                         child: Text(
                                           'تغییر وضعیت',
                                           style: Theme.of(context)

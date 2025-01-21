@@ -191,77 +191,37 @@ class _HomeScreenState extends State<HomeScreen> {
                         icon: PhosphorIcons.userCircle(
                             PhosphorIconsStyle.regular)),
                     menueButton(
-                        context: context,
-                        onPressed: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) {
-                                return MultiBlocProvider(
-                                  providers: [
-                                    BlocProvider(
-                                      create: (context) {
-                                        final TicketBloc bloc = TicketBloc();
-                                        bloc.add(TicketStartEvent());
-                                        return bloc;
-                                      },
-                                    ),
-                                    //  BlocProvider(
-                                    //     create: (context) {
-                                    //       final SendTicketBloc bloc = SendTicketBloc();
-                                    //       bloc.add(TicketStartEvent());
-                                    //       return bloc;
-                                    //     },
-                                    //   ),
-                                  ],
-                                  child: const TicketDatalist(),
-                                );
-                              },
-                            ),
-                          );
-                        },
-                        text: 'تیکت ها',
-                        icon: PhosphorIcons.ticket(PhosphorIconsStyle.regular)),
-                    menueButton(
                       context: context,
                       onPressed: () {
-                        BlocProvider.of<MetabaseBloc>(context)
-                            .add(MetabaseClickEvent());
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return MultiBlocProvider(
+                                providers: [
+                                  BlocProvider(
+                                    create: (context) {
+                                      final TicketBloc bloc = TicketBloc();
+                                      bloc.add(TicketStartEvent());
+                                      return bloc;
+                                    },
+                                  ),
+                                  //  BlocProvider(
+                                  //     create: (context) {
+                                  //       final SendTicketBloc bloc = SendTicketBloc();
+                                  //       bloc.add(TicketStartEvent());
+                                  //       return bloc;
+                                  //     },
+                                  //   ),
+                                ],
+                                child: const TicketDatalist(),
+                              );
+                            },
+                          ),
+                        );
                       },
-                      text: 'گزارش ها',
-                      icon: PhosphorIcons.receipt(PhosphorIconsStyle.regular),
+                      text: 'تیکت ها',
+                      icon: PhosphorIcons.ticket(PhosphorIconsStyle.regular),
                     ),
-                    // menueButton(
-                    //     context: context,
-                    //     onPressed: () {
-                    //       Navigator.of(context).push(
-                    //         MaterialPageRoute(
-                    //           builder: (context) {
-                    //             return MultiBlocProvider(
-                    //               providers: [
-                    //                 BlocProvider(
-                    //                   create: (context) {
-                    //                     final WithdrawBloc bloc =
-                    //                         WithdrawBloc();
-                    //                     bloc.add(WithdrawStartEvent());
-                    //                     return bloc;
-                    //                   },
-                    //                 ),
-                    //                 //  BlocProvider(
-                    //                 //     create: (context) {
-                    //                 //       final SendTicketBloc bloc = SendTicketBloc();
-                    //                 //       bloc.add(TicketStartEvent());
-                    //                 //       return bloc;
-                    //                 //     },
-                    //                 //   ),
-                    //               ],
-                    //               child: const WithdrawScreen(),
-                    //             );
-                    //           },
-                    //         ),
-                    //       );
-                    //     },
-                    //     text: 'درخواست نقد شدن',
-                    //     icon: PhosphorIcons.money(PhosphorIconsStyle.regular)),
                     menueButton(
                         context: context,
                         onPressed: () {

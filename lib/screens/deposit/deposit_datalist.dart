@@ -424,12 +424,12 @@ class _DepositScreenState extends State<DepositScreen> {
                                             ),
                                           ),
                                         ),
-                                        if (withdraw.user!.type == 0) ...{
+                                        if (withdraw.user!.type == false) ...{
                                           const DataCell(
                                             Text('حقیقی'),
                                           ),
                                         },
-                                        if (withdraw.user!.type == 1) ...{
+                                        if (withdraw.user!.type == true) ...{
                                           const DataCell(
                                             Text('حقوقی'),
                                           ),

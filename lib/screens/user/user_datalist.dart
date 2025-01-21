@@ -140,12 +140,12 @@ class _UserDataListState extends State<UserDataList> {
                                                 child: Text(users.name!),
                                               ),
                                             ),
-                                            if (users.type == 0) ...{
+                                            if (users.type == false) ...{
                                               const DataCell(
                                                 Text('حقیقی'),
                                               )
                                             },
-                                            if (users.type == 1) ...{
+                                            if (users.type == true) ...{
                                               const DataCell(
                                                 Text('حقوقی'),
                                               )
