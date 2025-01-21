@@ -33,7 +33,7 @@ class User {
     return User(
       id: json['id'],
       type: json['type'],
-      fullName: json['full_name'] ?? 'نامشخص',
+      fullName: json['name'] ?? 'نامشخص',
       email: json['email'] ?? 'نامشخص',
       mobile: json['mobile'] ?? 'نامشخص',
       nationalCode: json['national_code'] ?? 'نامشخص',

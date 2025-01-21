@@ -81,7 +81,7 @@ class User {
         nationalCode: json['user']['national_code'],
         idCode: json['user']['id_code'],
         uuid: json['user']['uuid'],
-        fullName: json['user']['full_name'] ?? 'نامشخص',
+        fullName: json['user']['name'] ?? 'نامشخص',
         isAdmin: json['user']['is_admin'],
         //verified: json['user']['verified'],
         wallet: json['user']['wallet'],

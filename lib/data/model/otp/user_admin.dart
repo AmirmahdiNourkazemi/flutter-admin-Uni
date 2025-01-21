@@ -68,7 +68,7 @@ class User {
       createdAt: json['user']['created_at'],
       updatedAt: json['user']['updated_at'],
       deletedAt: json['user']['deleted_at'],
-      fullName: json['user']['full_name'],
+      fullName: json['user']['name'],
     );
   }
 }

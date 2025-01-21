@@ -55,7 +55,7 @@ class User {
       mobile: json['mobile'] ?? 'نامشخص',
       nationalCode: json['national_code'] ?? 'نامشخص',
       idCode: json['id_code'],
-      fullName: json['full_name'] ?? 'نامشخص',
+      fullName: json['name'] ?? 'نامشخص',
       uuid: json['uuid'],
       isAdmin: json['is_admin'],
       //verified: json['user']['verified'],

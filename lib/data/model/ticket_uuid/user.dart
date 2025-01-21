@@ -70,7 +70,7 @@ class User {
       updatedAt: json['updated_at'],
       deletedAt: json['deleted_at'],
       inviterId: json['inviter_id'],
-      fullName: json['full_name'],
+      fullName: json['name'],
     );
   }
 }
